@@ -201,25 +201,26 @@ export default () => {
                         onChange={(arr, _) => change(6, arr)}
                     />
                 </div>
-                <div>
-                    <div className='nextweek-title'>特色饭食</div>
-                    <Selector
-                        value={[food[7] as number]}
-                        columns={2}
-                        disabled={choose[3]}
-                        options={ricelist}
-                        onChange={(arr, _) => change(7, arr)}
-                    />
-                </div>
-                <div>
-                    <div className='nextweek-title'>日式料理</div>
-                    <Selector
-                        value={[food[8] as number]}
-                        columns={2}
-                        disabled={choose[4]}
-                        options={japaneselist}
-                        onChange={(arr, _) => change(8, arr)}
-                    />
+                <div className='nextweek-line'>
+                    <div className='nextweek-rice'>
+                        <div className='nextweek-title'>特色饭食</div>
+                        <Selector
+                            columns={1}
+                            value={[food[7] as number]}
+                            disabled={choose[3]}
+                            options={ricelist}
+                            onChange={(arr, _) => change(7, arr)}
+                        />
+                    </div>
+                    <div className='nextweek-ja'>
+                        <div className='nextweek-title'>日式料理</div>
+                        <Selector
+                            columns={1}
+                            value={[food[8] as number]}
+                            disabled={choose[4]}
+                            options={japaneselist}
+                            onChange={(arr, _) => change(8, arr)}
+                        /></div>
                 </div>
             </Form>
         </div >
