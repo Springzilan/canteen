@@ -1,6 +1,5 @@
 import './index.css'
-import { Button, Form, Input, Picker, Space, Toast } from 'antd-mobile';
-import { FormItem } from 'antd-mobile/es/components/form/form-item';
+import { Button, Form, Picker, Space, Toast } from 'antd-mobile';
 import { AddCircleOutline, CloseCircleOutline } from 'antd-mobile-icons'
 import { useState, RefObject } from 'react'
 
@@ -131,7 +130,7 @@ export default () => {
 										<Form.Item
 											name='bigmeat'
 											valuePropName={bigmeat[i]}
-											onClick={(e, PickerRef: RefObject<PickerRef>) => {
+											onClick={(_, PickerRef: RefObject<PickerRef>) => {
 												PickerRef.current?.open()
 											}}>
 											<Picker
@@ -174,7 +173,7 @@ export default () => {
 										<Form.Item
 											name='smallmeat'
 											valuePropName={smallmeat[i]}
-											onClick={(e, PickerRef: RefObject<PickerRef>) => {
+											onClick={(_, PickerRef: RefObject<PickerRef>) => {
 												PickerRef.current?.open()
 											}}>
 											<Picker
@@ -217,7 +216,7 @@ export default () => {
 										<Form.Item
 											name='vegetable'
 											valuePropName={vegetable[i]}
-											onClick={(e, PickerRef: RefObject<PickerRef>) => {
+											onClick={(_, PickerRef: RefObject<PickerRef>) => {
 												PickerRef.current?.open()
 											}}>
 											<Picker

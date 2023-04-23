@@ -12,8 +12,6 @@ const Noddle = lazy(() => import('./routes/noddle'));
 const Rice = lazy(() => import('./routes/rice'));
 const JapaneseFood = lazy(() => import('./routes/japanesefood'));
 const Nextweek = lazy(() => import('./routes/nextweek'));
-const TestDemo = lazy(() => import('./routes/testdemo'));
-// const TestDemo = lazy(() => import('./routes/testdemo'));
 const router = createBrowserRouter([
   {
     path: "/",
@@ -49,10 +47,6 @@ const router = createBrowserRouter([
       {
         path: "/nextweek",
         element: <Suspense><Nextweek /></Suspense>
-      },
-      {
-        path: "/test",
-        element: <Suspense><TestDemo /></Suspense>
       }
     ]
   }
