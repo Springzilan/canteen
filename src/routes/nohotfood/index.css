@@ -1,8 +1,8 @@
-.page-section {
+.nohotfood-page-section {
     margin: 0 0.5rem;
 }
 
-.selectbox {
+.nohotfood-selectbox {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -10,11 +10,11 @@
     margin-bottom: 0.1rem;
 }
 
-.formitem {
+.nohotfood-formitem {
     width: 95%;
 }
 
-.title {
+.nohotfood-title {
     font-size: 1.3rem;
     padding: 0.5rem;
     /* background-color: #fafbfc; */
@@ -28,7 +28,7 @@
     position: relative;
 }
 
-.title::before {
+.nohotfood-title::before {
     content: "";
     display: inline-block;
     position: absolute;
@@ -42,11 +42,11 @@
     border-radius: 1px;
 }
 
-.adm-list-card {
+.nohotfood-adm-list-card {
     margin: 0;
 }
 
-.add {
+.nohotfood-add {
     text-align: center;
     padding: 0.5rem;
 }

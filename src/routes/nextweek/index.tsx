@@ -1,13 +1,13 @@
 import './index.css'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { Selector, Button, Form, Toast } from 'antd-mobile'
-import { Link, redirect, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 // import { useHistory } from 'react-router-dom'
 export default () => {
     const weekList = ['周一', '周二', '周三', '周四', '周五']
     const [index, setIndex] = useState<number>(0)
     const [choose, setChoose] = useState<boolean[]>([false, false, false, false, false])
-    const [food, setFood] = useState<any[]>([null, null, null, null, null, null, null, null, null])
+    const [food, setFood] = useState<(number | null)[]>([null, null, null, null, null, null, null, null, null])
     const nohotlist = [[{
         label: '芹菜炒肉',
         value: 0,
@@ -109,11 +109,13 @@ export default () => {
         console.log(index, value)
     }
 
-    const nav = useNavigate();
+    const nav = useNavigate()
     // const history = useHistory()
-    const onFinish = (values: any) => {
+    const onFinish = (_: any) => {
         console.log(food.filter(item => item !== null))
         if (index < 4) {
+            setFood([null, null, null, null, null, null, null, null, null])
+            setChoose([false, false, false, false, false])
             setIndex(index + 1)
         } else {
             Toast.show({
@@ -122,15 +124,14 @@ export default () => {
                     console.log('after')
                 },
             })
-            nav('/')
 
-            // .history.push('/nextweek')
+            nav('/')
         }
     }
     // let
     return (
-        <div className='week'>
-            <div className='titleweek'>{weekList[index]}</div>
+        <div className='nextweek-week'>
+            <div className='nextweek-titleweek'>{weekList[index]}</div>
             <Form
                 name='form'
                 onFinish={onFinish}
@@ -142,20 +143,23 @@ export default () => {
                 }
             >
                 <div>
-                    <div className='title'>不辣套餐</div>
+                    <div className='nextweek-title'>不辣套餐</div>
                     <Selector
+                        value={[food[0] as number]}
                         columns={2}
                         disabled={choose[0]}
                         options={nohotlist[0]}
                         onChange={(arr, _) => change(0, arr)}
                     />
                     <Selector
+                        value={[food[1] as number]}
                         columns={2}
                         disabled={choose[0]}
                         options={nohotlist[1]}
                         onChange={(arr, _) => change(1, arr)}
                     />
                     <Selector
+                        value={[food[2] as number]}
                         columns={2}
                         disabled={choose[0]}
                         options={nohotlist[2]}
@@ -163,20 +167,23 @@ export default () => {
                     />
                 </div>
                 <div>
-                    <div className='title'>辣味套餐</div>
+                    <div className='nextweek-title'>辣味套餐</div>
                     <Selector
+                        value={[food[3] as number]}
                         columns={2}
                         disabled={choose[1]}
                         options={hotlist[0]}
                         onChange={(arr, _) => change(3, arr)}
                     />
                     <Selector
+                        value={[food[4] as number]}
                         columns={2}
                         disabled={choose[1]}
                         options={hotlist[1]}
                         onChange={(arr, _) => change(4, arr)}
                     />
                     <Selector
+                        value={[food[5] as number]}
                         columns={2}
                         disabled={choose[1]}
                         options={hotlist[2]}
@@ -184,8 +191,9 @@ export default () => {
                     />
                 </div>
                 <div>
-                    <div className='title'>特色面食</div>
+                    <div className='nextweek-title'>特色面食</div>
                     <Selector
+                        value={[food[6] as number]}
                         columns={2}
                         disabled={choose[2]}
                         options={noddlelist}
@@ -193,8 +201,9 @@ export default () => {
                     />
                 </div>
                 <div>
-                    <div className='title'>特色饭食</div>
+                    <div className='nextweek-title'>特色饭食</div>
                     <Selector
+                        value={[food[7] as number]}
                         columns={2}
                         disabled={choose[3]}
                         options={ricelist}
@@ -202,8 +211,9 @@ export default () => {
                     />
                 </div>
                 <div>
-                    <div className='title'>日式料理</div>
+                    <div className='nextweek-title'>日式料理</div>
                     <Selector
+                        value={[food[8] as number]}
                         columns={2}
                         disabled={choose[4]}
                         options={japaneselist}

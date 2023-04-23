@@ -1,10 +1,11 @@
 import './index.css'
-import { Button, Form, Input, Picker, Space } from 'antd-mobile';
+import { Button, Form, Input, Picker, Space, Toast } from 'antd-mobile';
 import { FormItem } from 'antd-mobile/es/components/form/form-item';
 import { AddCircleOutline, CloseCircleOutline } from 'antd-mobile-icons'
 import { useState, RefObject } from 'react'
 
 import type { PickerRef } from 'antd-mobile/es/components/picker'
+import { useNavigate } from 'react-router-dom';
 export default () => {
 
 	const [value, setValue] = useState<(string | null)[]>([])
@@ -63,14 +64,23 @@ export default () => {
 		setFlourShow(true)
 		console.log('iiii', value, tmp, x)
 	}
+	const nav = useNavigate();
 	const onFinish = (values: any) => {
 		console.log(noddle)
 		console.log(flour)
 		console.log(values)
+		Toast.show({
+			content: '提交完成',
+			afterClose: () => {
+				console.log('after')
+			},
+		})
+
+		nav('/')
 	}
 	return (
 		<div>
-			<div className='page-section'>
+			<div className='noddle-page-section'>
 				<Form
 					name='form'
 					onFinish={onFinish}
@@ -79,12 +89,12 @@ export default () => {
 							提交
 						</Button>
 					}>
-					<div className='title'>面类</div>
-					<div className='selector'>
+					<div className='noddle-title'>面类</div>
+					<div className='noddle-selector'>
 						{noddle.map((_, i) => {
 							return (
-								<div className='selectbox'>
-									<div className='formitem'>
+								<div className='noddle-selectbox'>
+									<div className='noddle-formitem'>
 										<Form.Item
 											name='noddle'
 											valuePropName={noddle[i]}
@@ -116,18 +126,18 @@ export default () => {
 								</div>
 							)
 						})}
-						{noddleaddshow ? (<div className='add' onClick={() => addNoddle('null')}>
+						{noddleaddshow ? (<div className='noddle-add' onClick={() => addNoddle('null')}>
 							<span>
 								<AddCircleOutline /> 添加
 							</span>
 						</div>) : ''}
 					</div>
-					<div className='title'>粉类</div>
-					<div className='selector'>
+					<div className='noddle-title'>粉类</div>
+					<div className='noddle-selector'>
 						{flour.map((_, i) => {
 							return (
-								<div className='selectbox'>
-									<div className='formitem'>
+								<div className='noddle-selectbox'>
+									<div className='noddle-formitem'>
 										<Form.Item
 											name='flour'
 											valuePropName={flour[i]}
@@ -159,7 +169,7 @@ export default () => {
 								</div>
 							)
 						})}
-						{flouraddshow ? (<div className='add' onClick={() => addFlour('null')}>
+						{flouraddshow ? (<div className='noddle-add' onClick={() => addFlour('null')}>
 							<span>
 								<AddCircleOutline /> 添加
 							</span>

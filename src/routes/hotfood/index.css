@@ -1,28 +1,28 @@
-.page-section {
+.hotfood-page-section {
     margin: 0.5rem;
 }
 
-.selectbox {
+.hotfood-selectbox {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.formitem {
+.hotfood-formitem {
     width: 95%;
 }
 
-.title {
+.hotfood-title {
     font-size: 1.3rem;
     padding: 0.5rem;
     background-color: #fafbfc;
 }
 
-.adm-list-card {
+.hotfood-adm-list-card {
     margin: 0;
 }
 
-.add {
+.hotfood-add {
     text-align: center;
     padding: 1rem;
 }

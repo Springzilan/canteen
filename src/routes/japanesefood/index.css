@@ -1,28 +1,28 @@
-.page-section {
+.japanesefood-page-section {
     margin: 0.5rem;
 }
 
-.selectbox {
+.japanesefood-selectbox {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.formitem {
+.japanesefood-formitem {
     width: 95%;
 }
 
-.title {
+.japanesefood-title {
     font-size: 1.3rem;
     padding: 0.5rem;
     background-color: #fafbfc;
 }
 
-.adm-list-card {
+.japanesefood-adm-list-card {
     margin: 0;
 }
 
-.add {
+.japanesefood-add {
     text-align: center;
     padding: 1rem;
 }

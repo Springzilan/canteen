@@ -1,10 +1,11 @@
 import './index.css'
-import { Button, Form, Input, Picker, Space } from 'antd-mobile';
+import { Button, Form, Input, Picker, Space, Toast } from 'antd-mobile';
 import { FormItem } from 'antd-mobile/es/components/form/form-item';
 import { AddCircleOutline, CloseCircleOutline } from 'antd-mobile-icons'
 import { useState, RefObject } from 'react'
 
 import type { PickerRef } from 'antd-mobile/es/components/picker'
+import { useNavigate } from 'react-router-dom';
 export default () => {
 
 	const [value, setValue] = useState<(string | null)[]>([])
@@ -95,15 +96,24 @@ export default () => {
 		setVegetableShow(true)
 		console.log('iiii', value, tmp, x)
 	}
+	const nav = useNavigate();
 	const onFinish = (values: any) => {
 		console.log(bigmeat)
 		console.log(smallmeat)
-		console.log(vegetable)
+		console.log('112e', vegetable)
 		console.log(values)
+		Toast.show({
+			content: '提交完成',
+			afterClose: () => {
+				console.log('after')
+			},
+		})
+
+		nav('/')
 	}
 	return (
 		<div>
-			<div className='page-section'>
+			<div className='hotfood-page-section'>
 				<Form
 					name='form'
 					onFinish={onFinish}
@@ -112,12 +122,12 @@ export default () => {
 							提交
 						</Button>
 					}>
-					<div className='title'>大荤</div>
-					<div className='selector'>
+					<div className='hotfood-title'>大荤</div>
+					<div className='hotfood-selector'>
 						{bigmeat.map((_, i) => {
 							return (
-								<div className='selectbox'>
-									<div className='formitem'>
+								<div className='hotfood-selectbox'>
+									<div className='hotfood-formitem'>
 										<Form.Item
 											name='bigmeat'
 											valuePropName={bigmeat[i]}
@@ -149,18 +159,18 @@ export default () => {
 								</div>
 							)
 						})}
-						{bigaddshow ? (<div className='add' onClick={() => addBig('null')}>
+						{bigaddshow ? (<div className='hotfood-add' onClick={() => addBig('null')}>
 							<span>
 								<AddCircleOutline /> 添加
 							</span>
 						</div>) : ''}
 					</div>
-					<div className='title'>小荤</div>
-					<div className='selector'>
+					<div className='hotfood-title'>小荤</div>
+					<div className='hotfood-selector'>
 						{smallmeat.map((_, i) => {
 							return (
-								<div className='selectbox'>
-									<div className='formitem'>
+								<div className='hotfood-selectbox'>
+									<div className='hotfood-formitem'>
 										<Form.Item
 											name='smallmeat'
 											valuePropName={smallmeat[i]}
@@ -192,18 +202,18 @@ export default () => {
 								</div>
 							)
 						})}
-						{smalladdshow ? (<div className='add' onClick={() => addSmall('null')}>
+						{smalladdshow ? (<div className='hotfood-add' onClick={() => addSmall('null')}>
 							<span>
 								<AddCircleOutline /> 添加
 							</span>
 						</div>) : ''}
 					</div>
-					<div className='title'>素菜</div>
-					<div className='selector'>
+					<div className='hotfood-title'>素菜</div>
+					<div className='hotfood-selector'>
 						{vegetable.map((_, i) => {
 							return (
-								<div className='selectbox'>
-									<div className='formitem'>
+								<div className='hotfood-selectbox'>
+									<div className='hotfood-formitem'>
 										<Form.Item
 											name='vegetable'
 											valuePropName={vegetable[i]}
@@ -235,7 +245,7 @@ export default () => {
 								</div>
 							)
 						})}
-						{vegetableaddshow ? (<div className='add' onClick={() => addVegetable('null')}>
+						{vegetableaddshow ? (<div className='hotfood-add' onClick={() => addVegetable('null')}>
 							<span>
 								<AddCircleOutline /> 添加
 							</span>

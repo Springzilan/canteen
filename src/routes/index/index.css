@@ -1,4 +1,4 @@
-.titlebox {
+.index-titlebox {
     background-color: rgb(137, 200, 250);
     height: 5rem;
     width: 12rem;
@@ -12,7 +12,13 @@
         4px 4px 5px 0px rgba(0, 0, 0, .1);
 }
 
-.list {
+/* .index-title {
+    font-size: 1.3rem;
+    padding: 0.5rem;
+    background-color: #fafbfc;
+} */
+
+.index-list {
     text-align: center;
     font-size: 1rem;
     font-weight: bold;
@@ -21,7 +27,7 @@
     padding: 0;
 }
 
-.container {
+.index-container {
     width: 13rem;
     height: 13rem;
     text-align: center;
@@ -31,7 +37,7 @@
     margin: 2rem auto 0 auto;
 }
 
-.custom-btn {
+.index-custom-btn {
     width: 5.3rem;
     height: 5.3rem;
     line-height: 5.3rem;
@@ -50,21 +56,21 @@
     font-weight: bold;
 }
 
-.btn-1 {
+.index-btn-1 {
     background: rgb(0, 172, 238);
     background: linear-gradient(0deg, rgba(0, 172, 238, 1) 0%, rgba(2, 126, 251, 1) 100%);
 }
 
-.btn-2 {
+.index-btn-2 {
     background-color: #4dccc6;
     background-image: linear-gradient(315deg, #4dccc6 0%, #96e4df 74%);
 }
 
-.btn-3 {
+.index-btn-3 {
     background: rgb(247, 150, 192);
     background: radial-gradient(circle, rgba(247, 150, 192, 1) 0%, rgba(118, 174, 241, 1) 100%);
 }
 
-.btn-4 {
+.index-btn-4 {
     background: linear-gradient(0deg, rgba(255, 151, 0, 1) 0%, rgba(251, 75, 2, 1) 100%);
 }

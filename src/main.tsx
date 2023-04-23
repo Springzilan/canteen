@@ -20,7 +20,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Suspense><Index /></Suspense>
+        element: <Index />
       },
       {
         path: "/wanteat",

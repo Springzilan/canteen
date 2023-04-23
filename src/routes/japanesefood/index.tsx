@@ -1,10 +1,11 @@
 import './index.css'
-import { Button, Form, Input, Picker, Space } from 'antd-mobile';
+import { Button, Form, Input, Picker, Space, Toast } from 'antd-mobile';
 import { FormItem } from 'antd-mobile/es/components/form/form-item';
 import { AddCircleOutline, CloseCircleOutline } from 'antd-mobile-icons'
 import { useState, RefObject } from 'react'
 
 import type { PickerRef } from 'antd-mobile/es/components/picker'
+import { useNavigate } from 'react-router-dom';
 export default () => {
 
 	const [value, setValue] = useState<(string | null)[]>([])
@@ -41,13 +42,23 @@ export default () => {
 		setShow(true)
 		console.log('iiii', value, tmp, x)
 	}
+
+	const nav = useNavigate();
 	const onFinish = (values: any) => {
 		console.log(food)
 		console.log(values)
+		Toast.show({
+			content: '提交完成',
+			afterClose: () => {
+				console.log('after')
+			},
+		})
+
+		nav('/')
 	}
 	return (
 		<div>
-			<div className='page-section'>
+			<div className='japanesefood-page-section'>
 				<Form
 					name='form'
 					onFinish={onFinish}
@@ -56,12 +67,12 @@ export default () => {
 							提交
 						</Button>
 					}>
-					<div className='title'>套餐</div>
-					<div className='selector'>
+					<div className='japanesefood-title'>套餐</div>
+					<div className='japanesefood-selector'>
 						{food.map((_, i) => {
 							return (
-								<div className='selectbox'>
-									<div className='formitem'>
+								<div className='japanesefood-selectbox'>
+									<div className='japanesefood-formitem'>
 										<Form.Item
 											name='food'
 											valuePropName={food[i]}
@@ -93,7 +104,7 @@ export default () => {
 								</div>
 							)
 						})}
-						{addshow ? (<div className='add' onClick={() => add('null')}>
+						{addshow ? (<div className='japanesefood-add' onClick={() => add('null')}>
 							<span>
 								<AddCircleOutline /> 添加
 							</span>

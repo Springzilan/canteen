@@ -1,28 +1,28 @@
-.page-section {
+.rice-page-section {
     margin: 0.5rem;
 }
 
-.selectbox {
+.rice-selectbox {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.formitem {
+.rice-formitem {
     width: 95%;
 }
 
-.title {
+.rice-title {
     font-size: 1.3rem;
     padding: 0.5rem;
     background-color: #fafbfc;
 }
 
-.adm-list-card {
+.rice-adm-list-card {
     margin: 0;
 }
 
-.add {
+.rice-add {
     text-align: center;
     padding: 1rem;
 }

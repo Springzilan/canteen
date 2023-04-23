@@ -4,29 +4,29 @@ import './index.css'
 export default () => {
     return (
         <>
-            <div className='titlebox'>
-                <div className='title'>不辣套餐</div>
+            <div className='index-titlebox'>
+                <div className='index-title'>不辣套餐</div>
             </div>
-            <ul className='list'>
+            <ul className='index-list'>
                 <li>菠菜炒鸡蛋</li>
                 <li>凉拌黄瓜</li>
                 <li>宫保鸡丁</li>
             </ul>
-            <div className="container">
+            <div className="index-container">
                 <Link to="/nextweek">
-                    <div className="custom-btn btn-1">
+                    <div className="index-custom-btn index-btn-1">
                         下周吃啥
                     </div>
                 </Link>
                 <Link to="/wanteat">
-                    <div className="custom-btn btn-2">
+                    <div className="index-custom-btn index-btn-2">
                         我想要吃
                     </div>
                 </Link>
-                <div className="custom-btn btn-3">
+                <div className="index-custom-btn index-btn-3">
                     餐后点评
                 </div>
-                <div className="custom-btn btn-4">
+                <div className="index-custom-btn index-btn-4">
                     我要反馈
                 </div>
             </div>
