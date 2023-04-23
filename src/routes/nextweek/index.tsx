@@ -120,6 +120,7 @@ export default () => {
         } else {
             Toast.show({
                 content: '提交完成',
+                position: 'bottom',
                 afterClose: () => {
                     console.log('after')
                 },

@@ -103,6 +103,7 @@ export default () => {
 		console.log(values)
 		Toast.show({
 			content: '提交完成',
+			position: 'bottom',
 			afterClose: () => {
 				console.log('after')
 			},
