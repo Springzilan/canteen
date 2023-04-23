@@ -1,0 +1,70 @@
+.titlebox {
+    background-color: rgb(137, 200, 250);
+    height: 5rem;
+    width: 12rem;
+    line-height: 5rem;
+    text-align: center;
+    margin: 4rem auto 2rem auto;
+    font-size: 2.5rem;
+    color: #fff;
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+        7px 7px 20px 0px rgba(0, 0, 0, .1),
+        4px 4px 5px 0px rgba(0, 0, 0, .1);
+}
+
+.list {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 13rem;
+    height: 13rem;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 2rem auto 0 auto;
+}
+
+.custom-btn {
+    width: 5.3rem;
+    height: 5.3rem;
+    line-height: 5.3rem;
+    color: #fff;
+    /* padding: 10rpx 15rpx; */
+    /* font-family: 'Lato', sans-serif; */
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    /* position: relative; */
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+        7px 7px 20px 0px rgba(0, 0, 0, .1),
+        4px 4px 5px 0px rgba(0, 0, 0, .1);
+    text-align: center;
+    border: none;
+    font-weight: bold;
+}
+
+.btn-1 {
+    background: rgb(0, 172, 238);
+    background: linear-gradient(0deg, rgba(0, 172, 238, 1) 0%, rgba(2, 126, 251, 1) 100%);
+}
+
+.btn-2 {
+    background-color: #4dccc6;
+    background-image: linear-gradient(315deg, #4dccc6 0%, #96e4df 74%);
+}
+
+.btn-3 {
+    background: rgb(247, 150, 192);
+    background: radial-gradient(circle, rgba(247, 150, 192, 1) 0%, rgba(118, 174, 241, 1) 100%);
+}
+
+.btn-4 {
+    background: linear-gradient(0deg, rgba(255, 151, 0, 1) 0%, rgba(251, 75, 2, 1) 100%);
+}

@@ -1,0 +1,52 @@
+.page-section {
+    margin: 0 0.5rem;
+}
+
+.selectbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 0.1rem solid #333; */
+    margin-bottom: 0.1rem;
+}
+
+.formitem {
+    width: 95%;
+}
+
+.title {
+    font-size: 1.3rem;
+    padding: 0.5rem;
+    /* background-color: #fafbfc; */
+    width: 4.5rem;
+    /* font-size: 36px; */
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    /* padding: 10px 0; */
+    /* margin-top: 0.8rem; */
+    position: relative;
+}
+
+.title::before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    margin-top: -0.5rem;
+    width: 2pX;
+    height: 1rem;
+    background-color: #6190e8;
+    box-shadow: 0 0.1rem 0.2rem 0 rgba(97, 144, 232, .2);
+    border-radius: 1px;
+}
+
+.adm-list-card {
+    margin: 0;
+}
+
+.add {
+    text-align: center;
+    padding: 0.5rem;
+}
