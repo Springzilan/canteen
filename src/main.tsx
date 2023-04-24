@@ -12,6 +12,7 @@ const Noddle = lazy(() => import('./routes/noddle'));
 const Rice = lazy(() => import('./routes/rice'));
 const JapaneseFood = lazy(() => import('./routes/japanesefood'));
 const Nextweek = lazy(() => import('./routes/nextweek'));
+const Feedback = lazy(() => import('./routes/feedback'));
 const Error = lazy(() => import('./routes/404'));
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/wanteat",
         element: <Suspense><WantEat /></Suspense>
+      },
+      {
+        path: "/feedback",
+        element: <Suspense><Feedback /></Suspense>
       },
       {
         path: "/nohotfood",

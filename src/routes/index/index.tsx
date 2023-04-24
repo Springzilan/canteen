@@ -59,9 +59,10 @@ export default () => {
                 <div className="index-custom-btn index-btn-3">
                     餐后点评
                 </div>
-                <div className="index-custom-btn index-btn-4">
-                    我要反馈
-                </div>
+                <Link to="/feedback">
+                    <div className="index-custom-btn index-btn-4">
+                        我要反馈
+                    </div></Link>
             </div>
         </ >
     )
