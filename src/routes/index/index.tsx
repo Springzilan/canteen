@@ -1,9 +1,23 @@
 import { Link } from 'react-router-dom'
 import './index.css'
+import Cookies, { remove } from 'js-cookie'
+import { Button, Toast } from 'antd-mobile'
 
 export default () => {
     return (
         <>
+            <Button onClick={() => {
+                Cookies.set('user', '123456')
+            }}>设置cookie</Button>
+            <Button onClick={() => {
+                Toast.show({
+                    content: <>{Cookies.get('user')}</>,
+                    position: 'bottom',
+                    afterClose: () => {
+                        Cookies.remove('user')
+                    }
+                })
+            }}>查看cookie</Button>
             <div className='index-titlebox'>
                 <div className='index-title'>不辣套餐</div>
             </div>
