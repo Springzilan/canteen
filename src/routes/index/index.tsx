@@ -1,23 +1,42 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './index.css'
 import Cookies from 'js-cookie'
-import { Button, Toast } from 'antd-mobile'
+import { Button, Input, Form, Toast } from 'antd-mobile'
 
 export default () => {
+    const nav = useNavigate()
+    const submit = (value: string) => {
+        Cookies.set('user', value)
+        nav('/')
+    }
+    if (!Cookies.get('user')) {
+        return (
+            <>
+                <div className='user'>
+                    <Form
+                        name="form"
+                        onFinish={(value) => submit(value.user)}
+                        layout='horizontal'
+                        mode='card'
+                        footer={
+                            <Button block type='submit' color='primary' size='large' style={{ marginTop: '1rem' }}>
+                                提交
+                            </Button>
+                        }
+                    >
+                        <Form.Item
+                            name='user'
+                            label='用户名'
+                            rules={[{ required: true, message: '用户名不能为空' }]}
+                        >
+                            <Input placeholder='请输入用户名' />
+                        </Form.Item>
+                    </Form>
+                </div>
+            </>)
+    }
     return (
         <>
-            <Button onClick={() => {
-                Cookies.set('user', '123456')
-            }}>设置cookie</Button>
-            <Button onClick={() => {
-                Toast.show({
-                    content: <>{Cookies.get('user')}</>,
-                    position: 'bottom',
-                    afterClose: () => {
-                        Cookies.remove('user')
-                    }
-                })
-            }}>查看cookie</Button>
             <div className='index-titlebox'>
                 <div className='index-title'>不辣套餐</div>
             </div>
