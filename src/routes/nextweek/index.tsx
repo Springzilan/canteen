@@ -192,7 +192,7 @@ export default () => {
                     />
                 </div>
                 <div>
-                    <div className='nextweek-title'>特色面食</div>
+                    <div className='nextweek-title'>水煮类</div>
                     <Selector
                         value={[food[6] as number]}
                         columns={2}
@@ -203,7 +203,7 @@ export default () => {
                 </div>
                 <div className='nextweek-line'>
                     <div className='nextweek-rice'>
-                        <div className='nextweek-title'>特色饭食</div>
+                        <div className='nextweek-title'>面料类</div>
                         <Selector
                             columns={1}
                             value={[food[7] as number]}

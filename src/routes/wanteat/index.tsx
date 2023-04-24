@@ -12,10 +12,10 @@ export default () => {
                 <Button className='wanteat-btn wanteat-btn2'>辣味套餐</Button>
             </Link>
             <Link to="/noddle">
-                <Button className='wanteat-btn wanteat-btn3'>特色面食</Button>
+                <Button className='wanteat-btn wanteat-btn3'>水煮类</Button>
             </Link>
             <Link to="/rice">
-                <Button className='wanteat-btn wanteat-btn4'>特色饭食</Button>
+                <Button className='wanteat-btn wanteat-btn4'>面料类</Button>
             </Link>
             <Link to="/japanesefood">
                 <Button className='wanteat-btn wanteat-btn5'>日式料理</Button>

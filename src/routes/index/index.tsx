@@ -13,14 +13,14 @@ export default () => {
                 <li>宫保鸡丁</li>
             </ul>
             <div className="index-container">
-                <Link to="/nextweek">
+                <Link to="/wanteat">
                     <div className="index-custom-btn index-btn-1">
-                        下周吃啥
+                        我想要吃
                     </div>
                 </Link>
-                <Link to="/wanteat">
+                <Link to="/nextweek">
                     <div className="index-custom-btn index-btn-2">
-                        我想要吃
+                        下周吃啥
                     </div>
                 </Link>
                 <div className="index-custom-btn index-btn-3">
