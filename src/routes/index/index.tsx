@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import './index.css'
 import Cookies from 'js-cookie'
-import { Button, Input, Form, Toast } from 'antd-mobile'
+import { Button, Input, Form } from 'antd-mobile'
 
 export default () => {
     const nav = useNavigate()
