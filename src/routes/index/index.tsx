@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import './index.css'
-import Cookies, { remove } from 'js-cookie'
+import Cookies from 'js-cookie'
 import { Button, Toast } from 'antd-mobile'
 
 export default () => {
