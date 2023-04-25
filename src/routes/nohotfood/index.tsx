@@ -1,100 +1,118 @@
 import './index.css'
-import { Button, Form, Picker, Space, Toast } from 'antd-mobile';
+import { Button, Cascader, CascaderOption, Form, Toast } from 'antd-mobile';
 import { AddCircleOutline, CloseCircleOutline } from 'antd-mobile-icons'
-import { useState, RefObject } from 'react'
+import { useEffect, useState } from 'react'
 
-import type { PickerRef } from 'antd-mobile/es/components/picker'
 import { useNavigate } from 'react-router-dom';
+import { get } from '../../util/api';
 export default () => {
 
-	const [value, setValue] = useState<(string | null)[]>([])
-	const bigmeatselector = [[
-		{ label: '猪肉', value: '猪肉' },
-		{ label: '牛肉', value: '牛肉' },
-		{ label: '羊肉', value: '羊肉' },
-		{ label: '鸭肉', value: '鸭肉' },
-		{ label: '鸡肉', value: '鸡肉' }
-	]
-	]
-	const smallmeatselector = [[
-		{ label: '鸡蛋', value: '鸡蛋' },
-		{ label: '鱼', value: '鱼' },
-		{ label: '虾', value: '虾' },
-		{ label: '蟹', value: '蟹' }]]
-
-	const vegetableselector = [[
-		{ label: '西红柿', value: '西红柿' },
-		{ label: '茄子', value: '茄子' },
-		{ label: '土豆', value: '土豆' },
-		{ label: '豆角', value: '豆角' },
-		{ label: '青椒', value: '青椒' }]]
-
+	const [bigmeatselector, setBigmeatSelector] = useState<CascaderOption[]>([])
+	const [bigmeatVisible, setBigmeatVisible] = useState([false, false, false])
+	const changeBigmeatVisible = (index: number, visible: boolean) => {
+		let tmp = bigmeatVisible.slice()
+		tmp[index] = visible
+		setBigmeatVisible(tmp)
+	}
 	const [bigaddshow, setBigShow] = useState(true)
-	const [smalladdshow, setSmallShow] = useState(true)
-	const [vegetableaddshow, setVegetableShow] = useState(true)
+	const [bigmeat, setbigItem] = useState<string[][]>([])
 
-	const [bigmeat, setbigItem] = useState<string[]>([])
-	const [smallmeat, setsmallItem] = useState<string[]>([])
-	const [vegetable, setvegetableItem] = useState<string[]>([])
-	const addBig = (x: string) => {
+	const addBig = (x: string[]) => {
 		setbigItem([...bigmeat, x])
 		if (bigmeat.length === 2) {
 			setBigShow(false)
 		}
 	}
-	const addSmall = (x: string) => {
+	const change_big = (index: number, value: string[]) => {
+		console.log('change_big', index, value);
+
+		let tmp = bigmeat.slice()
+		tmp[index] = value
+		setbigItem(tmp)
+	}
+	const deleteBigItem = (x: number) => {
+		let tmp = bigmeat.slice()
+		tmp.splice(x, 1)
+		setbigItem(tmp)
+		setBigShow(true)
+	}
+
+
+
+	const [smallmeatselector, setSmallmeatSelector] = useState<CascaderOption[]>([])
+	const [smallmeatVisible, setSmallmeatVisible] = useState([false, false, false])
+	const changeSmallmeatVisible = (index: number, visible: boolean) => {
+		let tmp = smallmeatVisible.slice()
+		tmp[index] = visible
+		setSmallmeatVisible(tmp)
+	}
+	const [smalladdshow, setSmallShow] = useState(true)
+	const [smallmeat, setsmallItem] = useState<string[][]>([])
+
+
+	const addSmall = (x: string[]) => {
 		setsmallItem([...smallmeat, x])
 		if (smallmeat.length === 2) {
 			setSmallShow(false)
 		}
 	}
-	const addVegetable = (x: string) => {
-		setvegetableItem([...vegetable, x])
-		if (vegetable.length === 2) {
-			setVegetableShow(false)
-		}
-	}
-
-	const change_big = (index: number, value: string) => {
-		let tmp = bigmeat.slice()
-		tmp[index] = value
-		setbigItem(tmp)
-	}
-	const change_small = (index: number, value: string) => {
+	const change_small = (index: number, value: string[]) => {
 		let tmp = smallmeat.slice()
 		tmp[index] = value
 		setsmallItem(tmp)
-	}
-	const change_vegetable = (index: number, value: string) => {
-		let tmp = vegetable.slice()
-		tmp[index] = value
-		setvegetableItem(tmp)
-	}
-
-	const deleteBigItem = (x: number) => {
-		let tmp = bigmeat.slice()
-		tmp.splice(x, 1)
-		setbigItem(tmp)
-		setValue(tmp)
-		setBigShow(true)
-		console.log('iiii', value, tmp, x)
 	}
 	const deleteSmallItem = (x: number) => {
 		let tmp = smallmeat.slice()
 		tmp.splice(x, 1)
 		setsmallItem(tmp)
-		setValue(tmp)
 		setSmallShow(true)
-		console.log('iiii', value, tmp, x)
+	}
+	const [vegetableselector, setVegetableSelector] = useState<CascaderOption[]>([])
+	const [vegetableVisible, setVegetableVisible] = useState([false, false, false])
+	const changeVegetableVisible = (index: number, visible: boolean) => {
+		let tmp = vegetableVisible.slice()
+		tmp[index] = visible
+		setVegetableVisible(tmp)
+	}
+	const [vegetableaddshow, setVegetableShow] = useState(true)
+	const [vegetable, setvegetableItem] = useState<string[][]>([])
+
+	const addVegetable = (x: string[]) => {
+		setvegetableItem([...vegetable, x])
+		if (vegetable.length === 2) {
+			setVegetableShow(false)
+		}
+	}
+	const change_vegetable = (index: number, value: string[]) => {
+		let tmp = vegetable.slice()
+		tmp[index] = value
+		setvegetableItem(tmp)
 	}
 	const deleteVegetableItem = (x: number) => {
 		let tmp = vegetable.slice()
 		tmp.splice(x, 1)
 		setvegetableItem(tmp)
-		setValue(tmp)
 		setVegetableShow(true)
-		console.log('iiii', value, tmp, x)
 	}
+
+	useEffect(() => {
+		const getVegetableJson = async () => {
+			await get<CascaderOption[]>("/static/hot_big_meat.json").then((res) => {
+				console.log("res", res.data)
+				setBigmeatSelector(res.data)
+			})
+			await get<CascaderOption[]>("/static/hot_little_meat.json").then((res) => {
+				console.log("res", res.data)
+				setSmallmeatSelector(res.data)
+			})
+			await get<CascaderOption[]>("/static/vagetable.json").then((res) => {
+				console.log("res", res.data)
+				setVegetableSelector(res.data)
+			})
+		}
+		getVegetableJson()
+	}, []);
+
 	const nav = useNavigate();
 	const onFinish = (values: any) => {
 		console.log(bigmeat)
@@ -129,37 +147,41 @@ export default () => {
 								<div className='nohotfood-selectbox'>
 									<div className='nohotfood-formitem'>
 										<Form.Item
-											name='bigmeat'
-											valuePropName={bigmeat[i]}
-											onClick={(_, PickerRef: RefObject<PickerRef>) => {
-												PickerRef.current?.open()
+											valuePropName={'bigmeat' + i}
+											name={'bigmeat' + i}
+											onClick={() => {
+												changeBigmeatVisible(i, true)
 											}}>
-											<Picker
-												columns={bigmeatselector}
-												value={[bigmeat[i]]}
-												onConfirm={(setValue) => {
-													console.log('onConfirm', i, setValue[0])
-													change_big(i, setValue[0] as string)
+											<Cascader
+												options={bigmeatselector}
+												visible={bigmeatVisible[i]}
+												onClose={() => {
+													changeBigmeatVisible(i, false)
+												}}
+												value={bigmeat[i]}
+												onConfirm={(value) => {
+													change_big(i, value)
+												}}
+												onSelect={(val, extend) => {
+													console.log('onSelect', val, extend.items)
 												}}
 											>
-												{(items, { open }) => {
-													return (
-														<Space align='center'>
-															<Button onClick={open}>选择</Button>
-															{items.every(item => item === null)
-																? '未选择'
-																: items.map(item => item?.label ?? '未选择').join(' - ')}
-														</Space>
-													)
+												{items => {
+													console.log('items', items)
+													if (items.every(item => item === null)) {
+														return '未选择'
+													} else {
+														return items.map(item => item?.label ?? '未选择').join('-')
+													}
 												}}
-											</Picker>
+											</Cascader>
 										</Form.Item>
 									</div>
 									<div onClick={() => deleteBigItem(i)}><CloseCircleOutline /></div>
 								</div>
 							)
 						})}
-						{bigaddshow ? (<div className='nohotfood-add' onClick={() => addBig('null')}>
+						{bigaddshow ? (<div className='nohotfood-add' onClick={() => addBig([])}>
 							<span>
 								<AddCircleOutline /> 添加
 							</span>
@@ -172,37 +194,39 @@ export default () => {
 								<div className='nohotfood-selectbox'>
 									<div className='nohotfood-formitem'>
 										<Form.Item
-											name='smallmeat'
-											valuePropName={smallmeat[i]}
-											onClick={(_, PickerRef: RefObject<PickerRef>) => {
-												PickerRef.current?.open()
+											valuePropName={'smallmeat' + i}
+											onClick={() => {
+												changeSmallmeatVisible(i, true)
 											}}>
-											<Picker
-												columns={smallmeatselector}
-												value={[smallmeat[i]]}
-												onConfirm={(setValue) => {
-													console.log('onConfirm', i, setValue[0])
-													change_small(i, setValue[0] as string)
+											<Cascader
+												options={smallmeatselector}
+												visible={smallmeatVisible[i]}
+												onClose={() => {
+													changeSmallmeatVisible(i, false)
+												}}
+												value={smallmeat[i]}
+												onConfirm={(value) => {
+													change_small(i, value)
+												}}
+												onSelect={(val, extend) => {
+													console.log('onSelect', val, extend.items)
 												}}
 											>
-												{(items, { open }) => {
-													return (
-														<Space align='center'>
-															<Button onClick={open}>选择</Button>
-															{items.every(item => item === null)
-																? '未选择'
-																: items.map(item => item?.label ?? '未选择').join(' - ')}
-														</Space>
-													)
+												{items => {
+													if (items.every(item => item === null)) {
+														return '未选择'
+													} else {
+														return items.map(item => item?.label ?? '未选择').join('-')
+													}
 												}}
-											</Picker>
+											</Cascader>
 										</Form.Item>
 									</div>
 									<div onClick={() => deleteSmallItem(i)}><CloseCircleOutline /></div>
 								</div>
 							)
 						})}
-						{smalladdshow ? (<div className='nohotfood-add' onClick={() => addSmall('null')}>
+						{smalladdshow ? (<div className='nohotfood-add' onClick={() => addSmall([])}>
 							<span>
 								<AddCircleOutline /> 添加
 							</span>
@@ -215,37 +239,39 @@ export default () => {
 								<div className='nohotfood-selectbox'>
 									<div className='nohotfood-formitem'>
 										<Form.Item
-											name='vegetable'
-											valuePropName={vegetable[i]}
-											onClick={(_, PickerRef: RefObject<PickerRef>) => {
-												PickerRef.current?.open()
+											valuePropName={'vegetable' + i}
+											onClick={() => {
+												changeVegetableVisible(i, true)
 											}}>
-											<Picker
-												columns={vegetableselector}
-												value={[vegetable[i]]}
-												onConfirm={(setValue) => {
-													console.log('onConfirm', i, setValue[0])
-													change_vegetable(i, setValue[0] as string)
+											<Cascader
+												options={vegetableselector}
+												visible={vegetableVisible[i]}
+												onClose={() => {
+													changeVegetableVisible(i, false)
+												}}
+												value={vegetable[i]}
+												onConfirm={(value) => {
+													change_vegetable(i, value)
+												}}
+												onSelect={(val, extend) => {
+													console.log('onSelect', val, extend.items)
 												}}
 											>
-												{(items, { open }) => {
-													return (
-														<Space align='center'>
-															<Button onClick={open}>选择</Button>
-															{items.every(item => item === null)
-																? '未选择'
-																: items.map(item => item?.label ?? '未选择').join(' - ')}
-														</Space>
-													)
+												{items => {
+													if (items.every(item => item === null)) {
+														return '未选择'
+													} else {
+														return items.map(item => item?.label ?? '未选择').join('-')
+													}
 												}}
-											</Picker>
+											</Cascader>
 										</Form.Item>
 									</div>
 									<div onClick={() => deleteVegetableItem(i)}><CloseCircleOutline /></div>
 								</div>
 							)
 						})}
-						{vegetableaddshow ? (<div className='nohotfood-add' onClick={() => addVegetable('null')}>
+						{vegetableaddshow ? (<div className='nohotfood-add' onClick={() => addVegetable([])}>
 							<span>
 								<AddCircleOutline /> 添加
 							</span>

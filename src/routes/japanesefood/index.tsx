@@ -1,46 +1,52 @@
 import './index.css'
-import { Button, Form, Picker, Space, Toast } from 'antd-mobile';
+import { Button, Cascader, CascaderOption, Form, Toast } from 'antd-mobile';
 import { AddCircleOutline, CloseCircleOutline } from 'antd-mobile-icons'
-import { useState, RefObject } from 'react'
+import { useState, useEffect } from 'react'
 
-import type { PickerRef } from 'antd-mobile/es/components/picker'
 import { useNavigate } from 'react-router-dom';
+import { get } from '../../util/api';
 export default () => {
 
-	const [value, setValue] = useState<(string | null)[]>([])
-	const foodselector = [[
-		{ label: '猪肉', value: '猪肉' },
-		{ label: '牛肉', value: '牛肉' },
-		{ label: '羊肉', value: '羊肉' },
-		{ label: '鸭肉', value: '鸭肉' },
-		{ label: '鸡肉', value: '鸡肉' }
-	]
-	]
+
+	const [foodselector, setFoodSelector] = useState<CascaderOption[]>([])
+	const [foodVisible, setFoodVisible] = useState([false, false, false])
+	const changeFoodVisible = (index: number, visible: boolean) => {
+		let tmp = foodVisible.slice()
+		tmp[index] = visible
+		setFoodVisible(tmp)
+	}
 
 	const [addshow, setShow] = useState(true)
+	const [food, setItem] = useState<string[][]>([])
 
-	const [food, foodItem] = useState<string[]>([])
-	const add = (x: string) => {
-		foodItem([...food, x])
+	const add = (x: string[]) => {
+		setItem([...food, x])
 		if (food.length === 2) {
 			setShow(false)
 		}
 	}
 
-	const change = (index: number, value: string) => {
+	const change = (index: number, value: string[]) => {
 		let tmp = food.slice()
 		tmp[index] = value
-		foodItem(tmp)
+		setItem(tmp)
 	}
 
 	const deleteItem = (x: number) => {
 		let tmp = food.slice()
 		tmp.splice(x, 1)
-		foodItem(tmp)
-		setValue(tmp)
+		setItem(tmp)
 		setShow(true)
-		console.log('iiii', value, tmp, x)
 	}
+	useEffect(() => {
+		const getVegetableJson = async () => {
+			await get<CascaderOption[]>("/static/japanese.json").then((res) => {
+				console.log("res", res.data)
+				setFoodSelector(res.data)
+			})
+		}
+		getVegetableJson()
+	}, []);
 
 	const nav = useNavigate();
 	const onFinish = (values: any) => {
@@ -74,37 +80,43 @@ export default () => {
 								<div className='japanesefood-selectbox'>
 									<div className='japanesefood-formitem'>
 										<Form.Item
-											name='food'
-											valuePropName={food[i]}
-											onClick={(_, PickerRef: RefObject<PickerRef>) => {
-												PickerRef.current?.open()
+											valuePropName={'food' + i}
+											name={'food' + i}
+											onClick={() => {
+												changeFoodVisible(i, true)
 											}}>
-											<Picker
-												columns={foodselector}
-												value={[food[i]]}
-												onConfirm={(setValue) => {
-													console.log('onConfirm', i, setValue[0])
-													change(i, setValue[0] as string)
+											<Cascader
+												options={foodselector}
+												visible={foodVisible[i]}
+												onClose={() => {
+
+													changeFoodVisible(i, false)
 												}}
+												value={food[i]}
+												onConfirm={(value) => {
+													change(i, value)
+												}}
+												onSelect={(val, extend) => {
+													console.log('onSelect', val, extend.items)
+												}}
+
 											>
-												{(items, { open }) => {
-													return (
-														<Space align='center'>
-															<Button onClick={open}>选择</Button>
-															{items.every(item => item === null)
-																? '未选择'
-																: items.map(item => item?.label ?? '未选择').join(' - ')}
-														</Space>
-													)
+												{items => {
+													console.log('items', items)
+													if (items.every(item => item === null)) {
+														return '未选择'
+													} else {
+														return items.map(item => item?.label ?? '未选择').join('-')
+													}
 												}}
-											</Picker>
+											</Cascader>
 										</Form.Item>
 									</div>
 									<div onClick={() => deleteItem(i)}><CloseCircleOutline /></div>
 								</div>
 							)
 						})}
-						{addshow ? (<div className='japanesefood-add' onClick={() => add('null')}>
+						{addshow ? (<div className='japanesefood-add' onClick={() => add([])}>
 							<span>
 								<AddCircleOutline /> 添加
 							</span>
