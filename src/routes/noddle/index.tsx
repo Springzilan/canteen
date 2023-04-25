@@ -1,9 +1,8 @@
 import './index.css'
-import { Button, Cascader, CascaderOption, Form, Picker, Space, Toast } from 'antd-mobile';
+import { Button, Cascader, CascaderOption, Form, Toast } from 'antd-mobile';
 import { AddCircleOutline, CloseCircleOutline } from 'antd-mobile-icons'
-import { useState, RefObject, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
-import type { PickerRef } from 'antd-mobile/es/components/picker'
 import { useNavigate } from 'react-router-dom';
 import { get } from '../../util/api';
 export default () => {
