@@ -106,7 +106,7 @@ export default () => {
 													if (items.every(item => item === null)) {
 														return '未选择'
 													} else {
-														return items.map(item => item?.label ?? '未选择').join('-')
+														return items.map(item => item?.label ?? '未选择')[items.length - 1]
 													}
 												}}
 											</Cascader>
