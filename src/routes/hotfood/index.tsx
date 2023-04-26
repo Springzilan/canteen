@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 
 import { useNavigate } from 'react-router-dom';
 import { get } from '../../util/api';
+import Cookies from 'js-cookie';
 export default () => {
 
 	const [bigmeatselector, setBigmeatSelector] = useState<CascaderOption[]>([])
@@ -110,7 +111,9 @@ export default () => {
 	const onFinish = (values: any) => {
 		console.log(bigmeat)
 		console.log(smallmeat)
-		console.log('112e', vegetable)
+		console.log(vegetable)
+		Cookies.set('wanteat', 'yes')
+		console.log(Cookies.get('wanteat'))
 		console.log(values)
 		Toast.show({
 			content: '提交完成',

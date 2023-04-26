@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import './index.css'
 import Cookies from 'js-cookie'
 import { Button, Input, Form } from 'antd-mobile'
+import { useEffect, useState } from 'react'
 
 export default () => {
     const nav = useNavigate()
@@ -9,6 +10,12 @@ export default () => {
         Cookies.set('user', value)
         nav('/')
     }
+    const [wanteat, setWanteat] = useState<Boolean>(true)
+    useEffect(() => {
+        if (Cookies.get('wanteat')) {
+            setWanteat(false)
+        }
+    }, [])
     if (!Cookies.get('user')) {
         return (
             <>
@@ -46,11 +53,16 @@ export default () => {
                 <li>宫保鸡丁</li>
             </ul>
             <div className="index-container">
-                <Link to="/wanteat">
-                    <div className="index-custom-btn index-btn-1">
-                        我想要吃
-                    </div>
-                </Link>
+                <div className="index-custom-btn btn-false" style={{ display: wanteat ? 'none' : 'block' }}>
+                    我想要吃
+                </div>
+                <div className='wanteat' style={{ display: wanteat ? 'block' : 'none' }}>
+                    <Link to="/wanteat" >
+                        <div className="index-custom-btn index-btn-1" >
+                            我想要吃
+                        </div>
+                    </Link>
+                </div>
                 <Link to="/nextweek">
                     <div className="index-custom-btn index-btn-2">
                         下周吃啥

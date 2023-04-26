@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 
 import { useNavigate } from 'react-router-dom';
 import { get } from '../../util/api';
+import Cookies from 'js-cookie';
 export default () => {
 
 
@@ -52,6 +53,8 @@ export default () => {
 	const onFinish = (values: any) => {
 		console.log(food)
 		console.log(values)
+		Cookies.set('wanteat', 'yes')
+		console.log(Cookies.get('wanteat'))
 		Toast.show({
 			content: '提交完成',
 			position: 'bottom',
@@ -64,7 +67,7 @@ export default () => {
 	}
 	return (
 		<div>
-			<div className='japanesefood-page-section'>
+			<div className='rice-page-section'>
 				<Form
 					name='form'
 					onFinish={onFinish}
@@ -73,12 +76,12 @@ export default () => {
 							提交
 						</Button>
 					}>
-					<div className='japanesefood-title'>套餐</div>
-					<div className='japanesefood-selector'>
+					<div className='rice-title'>套餐</div>
+					<div className='rice-selector'>
 						{food.map((_, i) => {
 							return (
-								<div className='japanesefood-selectbox'>
-									<div className='japanesefood-formitem'>
+								<div className='rice-selectbox'>
+									<div className='rice-formitem'>
 										<Form.Item
 											valuePropName={'food' + i}
 											name={'food' + i}
@@ -116,7 +119,7 @@ export default () => {
 								</div>
 							)
 						})}
-						{addshow ? (<div className='japanesefood-add' onClick={() => add([])}>
+						{addshow ? (<div className='rice-add' onClick={() => add([])}>
 							<span>
 								<AddCircleOutline /> 添加
 							</span>

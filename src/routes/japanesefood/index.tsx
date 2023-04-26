@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 
 import { useNavigate } from 'react-router-dom';
 import { get } from '../../util/api';
+import Cookies from 'js-cookie';
 export default () => {
 
 
@@ -50,6 +51,8 @@ export default () => {
 
 	const nav = useNavigate();
 	const onFinish = (values: any) => {
+		Cookies.set('wanteat', 'yes')
+		console.log(Cookies.get('wanteat'))
 		console.log(food)
 		console.log(values)
 		Toast.show({

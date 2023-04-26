@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 
 import { useNavigate } from 'react-router-dom';
 import { get } from '../../util/api';
+import Cookies from 'js-cookie';
 export default () => {
 
 
@@ -81,6 +82,8 @@ export default () => {
 	const nav = useNavigate();
 	const onFinish = (values: any) => {
 		console.log(values)
+		Cookies.set('wanteat', 'yes')
+		console.log(Cookies.get('wanteat'))
 		Toast.show({
 			content: '提交完成',
 			position: 'bottom',
@@ -93,7 +96,7 @@ export default () => {
 	}
 	return (
 		<div>
-			<div className='noodle--page-section'>
+			<div className='noodlepage-section'>
 				<Form
 					name='form'
 					onFinish={onFinish}
@@ -102,12 +105,12 @@ export default () => {
 							提交
 						</Button>
 					}>
-					<div className='noodle--title'>面料类</div>
-					<div className='noodle--selector'>
+					<div className='noodle-title'>面料类</div>
+					<div className='noodle-selector'>
 						{noodle.map((_, i) => {
 							return (
-								<div className='noodle--selectbox'>
-									<div className='noodle--formitem'>
+								<div className='noodle-selectbox'>
+									<div className='noodle-formitem'>
 										<Form.Item
 											valuePropName={'noodle' + i}
 											onClick={() => {
@@ -141,18 +144,18 @@ export default () => {
 								</div>
 							)
 						})}
-						{noodleaddshow ? (<div className='noodle--add' onClick={() => addNoodle([])}>
+						{noodleaddshow ? (<div className='noodle-add' onClick={() => addNoodle([])}>
 							<span>
 								<AddCircleOutline /> 添加
 							</span>
 						</div>) : ''}
 					</div>
-					<div className='noodle--title'>水煮类</div>
-					<div className='noodle--selector'>
+					<div className='noodle-title'>水煮类</div>
+					<div className='noodle-selector'>
 						{flour.map((_, i) => {
 							return (
-								<div className='noodle--selectbox'>
-									<div className='noodle--formitem'>
+								<div className='noodle-selectbox'>
+									<div className='noodle-formitem'>
 										<Form.Item
 											valuePropName={'flour' + i}
 											onClick={() => {
@@ -186,7 +189,7 @@ export default () => {
 								</div>
 							)
 						})}
-						{flouraddshow ? (<div className='noodle--add' onClick={() => addFlour([])}>
+						{flouraddshow ? (<div className='noodle-add' onClick={() => addFlour([])}>
 							<span>
 								<AddCircleOutline /> 添加
 							</span>
