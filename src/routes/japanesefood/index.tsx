@@ -4,8 +4,9 @@ import { AddCircleOutline, CloseCircleOutline } from 'antd-mobile-icons'
 import { useState, useEffect } from 'react'
 
 import { useNavigate } from 'react-router-dom';
-import { get } from '../../util/api';
+import { get, post } from '../../util/api';
 import Cookies from 'js-cookie';
+import { WantEatDTO } from '../../lib/model';
 export default () => {
 
 
@@ -50,17 +51,27 @@ export default () => {
 	}, []);
 
 	const nav = useNavigate();
-	const onFinish = (values: any) => {
-		Cookies.set('wanteat', 'yes')
-		console.log(Cookies.get('wanteat'))
-		console.log(food)
-		console.log(values)
-		Toast.show({
-			content: '提交完成',
-			position: 'bottom',
-			afterClose: () => {
-				console.log('after')
-			},
+	const onFinish = async () => {
+		console.log('food', food)
+		var japanesefood: string[] = []
+		food.map((item) => {
+			japanesefood.push(item[item.length - 1])
+		})
+		var wanteat: WantEatDTO = {
+			"user": Cookies.get('user'),
+			"content": japanesefood
+		}
+		console.log('wanteat', wanteat)
+		await post<WantEatDTO>("/api/want", wanteat).then((res) => {
+			console.log("res", res.data)
+			if (res.data) {
+				Cookies.set('wanteat', 'yes')
+				Toast.show({
+					content: '提交完成',
+					position: 'bottom'
+				})
+			}
+
 		})
 
 		nav('/')

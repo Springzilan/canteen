@@ -4,8 +4,9 @@ import { AddCircleOutline, CloseCircleOutline } from 'antd-mobile-icons'
 import { useState, useEffect } from 'react'
 
 import { useNavigate } from 'react-router-dom';
-import { get } from '../../util/api';
+import { get, post } from '../../util/api';
 import Cookies from 'js-cookie';
+import { WantEatDTO } from '../../lib/model';
 export default () => {
 
 	const [bigmeatselector, setBigmeatSelector] = useState<CascaderOption[]>([])
@@ -119,20 +120,31 @@ export default () => {
 	}, []);
 
 	const nav = useNavigate();
-	const onFinish = (values: any) => {
+	const onFinish = async () => {
 		console.log(bigmeat)
 		console.log(smallmeat)
 		console.log(vegetable)
-		Cookies.set('wanteat', 'yes')
-		console.log(Cookies.get('wanteat'))
-		console.log(values)
-		Toast.show({
-			content: '提交完成',
-			position: 'bottom',
-			afterClose: () => {
-				console.log('after')
-			},
+		var hotfoodtmp = bigmeat.concat(smallmeat, vegetable)
+		var hotfood: string[] = []
+		hotfoodtmp.map((item) => {
+			hotfood.push(item[item.length - 1])
 		})
+		var wanteat: WantEatDTO = {
+			"user": Cookies.get('user'),
+			"content": hotfood
+		}
+		await post<WantEatDTO>("/api/want", wanteat).then(resp => {
+			// updateHistory(resp.data.data);
+			console.log('Success:', resp);
+			if (resp.data) {
+				Cookies.set('wanteat', 'yes')
+
+				Toast.show({
+					content: '提交完成',
+					position: 'bottom'
+				})
+			}
+		});
 
 		nav('/')
 	}

@@ -23,6 +23,7 @@ export default () => {
             <Button onClick={() => {
                 Cookies.remove('wanteat')
                 console.log(Cookies.get('wanteat'))
+                nav('/')
             }
             }>不提交</Button>
         </div>
