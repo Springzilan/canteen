@@ -15,6 +15,30 @@ export default () => {
 		tmp[index] = visible
 		setBigmeatVisible(tmp)
 	}
+	const [bigaddshow, setBigShow] = useState(true)
+	const [bigmeat, setbigItem] = useState<string[][]>([])
+	const [addBigmeatIndex, setAddBigmeatIndex] = useState(0)
+	const addBig = (x: string[]) => {
+		changeBigmeatVisible(addBigmeatIndex, true)
+		setAddBigmeatIndex(addBigmeatIndex + 1)
+		setbigItem([...bigmeat, x])
+		if (bigmeat.length === 2) {
+			setAddBigmeatIndex(0)
+			setBigShow(false)
+		}
+	}
+	const change_big = (index: number, value: string[]) => {
+		let tmp = bigmeat.slice()
+		tmp[index] = value
+		setbigItem(tmp)
+	}
+	const deleteBigItem = (x: number) => {
+		let tmp = bigmeat.slice()
+		tmp.splice(x, 1)
+		setbigItem(tmp)
+		setBigShow(true)
+	}
+
 	const [smallmeatselector, setSmallmeatSelector] = useState<CascaderOption[]>([])
 	const [smallmeatVisible, setSmallmeatVisible] = useState([false, false, false])
 	const changeSmallmeatVisible = (index: number, visible: boolean) => {
@@ -47,25 +71,16 @@ export default () => {
 		getVegetableJson()
 	}, []);
 
-	const [bigaddshow, setBigShow] = useState(true)
 	const [smalladdshow, setSmallShow] = useState(true)
-	const [vegetableaddshow, setVegetableShow] = useState(true)
-
-	const [bigmeat, setbigItem] = useState<string[][]>([])
 	const [smallmeat, setsmallItem] = useState<string[][]>([])
-	const [vegetable, setvegetableItem] = useState<string[][]>([])
-	const addBig = (x: string[]) => {
-		setbigItem([...bigmeat, x])
-		if (bigmeat.length === 2) {
-			setBigShow(false)
-		}
-	}
 	const addSmall = (x: string[]) => {
 		setsmallItem([...smallmeat, x])
 		if (smallmeat.length === 2) {
 			setSmallShow(false)
 		}
 	}
+	const [vegetableaddshow, setVegetableShow] = useState(true)
+	const [vegetable, setvegetableItem] = useState<string[][]>([])
 	const addVegetable = (x: string[]) => {
 		setvegetableItem([...vegetable, x])
 		if (vegetable.length === 2) {
@@ -73,11 +88,6 @@ export default () => {
 		}
 	}
 
-	const change_big = (index: number, value: string[]) => {
-		let tmp = bigmeat.slice()
-		tmp[index] = value
-		setbigItem(tmp)
-	}
 	const change_small = (index: number, value: string[]) => {
 		let tmp = smallmeat.slice()
 		tmp[index] = value
@@ -89,12 +99,6 @@ export default () => {
 		setvegetableItem(tmp)
 	}
 
-	const deleteBigItem = (x: number) => {
-		let tmp = bigmeat.slice()
-		tmp.splice(x, 1)
-		setbigItem(tmp)
-		setBigShow(true)
-	}
 	const deleteSmallItem = (x: number) => {
 		let tmp = smallmeat.slice()
 		tmp.splice(x, 1)
