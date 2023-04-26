@@ -8,12 +8,20 @@ export default () => {
     const nav = useNavigate()
     const submit = (value: string) => {
         Cookies.set('user', value)
+        console.log('gdhggcghc', Cookies.get('user'))
         nav('/')
     }
     const [wanteat, setWanteat] = useState<Boolean>(true)
+    const [borber, setBorber] = useState<Boolean>(true)
     useEffect(() => {
         if (Cookies.get('wanteat')) {
             setWanteat(false)
+        }
+        console.log('gdhggcghc', Cookies.get('user'))
+        if (Cookies.get('user') === 'borber') {
+            setBorber(false)
+            console.log(Cookies.get('user'))
+            console.log(borber)
         }
     }, [])
     if (!Cookies.get('user')) {
@@ -82,10 +90,15 @@ export default () => {
                 <div className="index-custom-btn index-btn-3">
                     餐后点评
                 </div>
-                <Link to="/feedback">
-                    <div className="index-custom-btn index-btn-4">
-                        我要反馈
-                    </div></Link>
+                <div className="index-custom-btn index-btn-4" style={{ display: borber ? 'block' : 'none' }}>
+                    我要反馈
+                </div>
+                <div style={{ display: borber ? 'none' : 'block' }}>
+                    <Link to="/feedback">
+                        <div className="index-custom-btn index-btn-4" >
+                            我要反馈
+                        </div>
+                    </Link></div>
             </div>
         </ >
     )
