@@ -20,6 +20,11 @@ export default () => {
                 })
                 nav('/')
             }}>登出</Button>
+            <Button onClick={() => {
+                Cookies.remove('wanteat')
+                console.log(Cookies.get('wanteat'))
+            }
+            }>不提交</Button>
         </div>
     )
 }

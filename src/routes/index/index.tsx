@@ -43,13 +43,15 @@ export default () => {
             </>)
     }
     const yesCommit = () => {
-        Toast.show({
-            content: '你已提交',
-            position: 'bottom',
-            afterClose: () => {
-                console.log('after')
-            },
-        })
+        if (Cookies.get('wanteat')) {
+            Toast.show({
+                content: '您已提交',
+                position: 'bottom',
+                afterClose: () => {
+                    console.log('after')
+                },
+            })
+        }
     }
     return (
         <>
