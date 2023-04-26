@@ -66,7 +66,7 @@ export default () => {
 		setFlourShow(true)
 	}
 	useEffect(() => {
-		const getVegetableJson = async () => {
+		const getNoodleJson = async () => {
 			await get<CascaderOption[]>("/static/noodles.json").then((res) => {
 				console.log("res", res.data)
 				setNoodleSelector(res.data)
@@ -76,7 +76,7 @@ export default () => {
 				setFlourSelector(res.data)
 			})
 		}
-		getVegetableJson()
+		getNoodleJson()
 	}, []);
 
 	const nav = useNavigate();

@@ -40,13 +40,13 @@ export default () => {
 		setShow(true)
 	}
 	useEffect(() => {
-		const getVegetableJson = async () => {
+		const getJapaneseFoodJson = async () => {
 			await get<CascaderOption[]>("/static/japanese.json").then((res) => {
 				console.log("res", res.data)
 				setFoodSelector(res.data)
 			})
 		}
-		getVegetableJson()
+		getJapaneseFoodJson()
 	}, []);
 
 	const nav = useNavigate();

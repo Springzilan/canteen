@@ -40,13 +40,13 @@ export default () => {
 		setShow(true)
 	}
 	useEffect(() => {
-		const getVegetableJson = async () => {
+		const getRiceJson = async () => {
 			await get<CascaderOption[]>("/static/rice.json").then((res) => {
 				console.log("res", res.data)
 				setFoodSelector(res.data)
 			})
 		}
-		getVegetableJson()
+		getRiceJson()
 	}, []);
 
 	const nav = useNavigate();

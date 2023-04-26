@@ -17,7 +17,6 @@ export default () => {
 	}
 	const [bigaddshow, setBigShow] = useState(true)
 	const [bigmeat, setbigItem] = useState<string[][]>([])
-
 	const addBig = (x: string[]) => {
 		setbigItem([...bigmeat, x])
 		if (bigmeat.length === 2) {
@@ -38,8 +37,6 @@ export default () => {
 		setBigShow(true)
 	}
 
-
-
 	const [smallmeatselector, setSmallmeatSelector] = useState<CascaderOption[]>([])
 	const [smallmeatVisible, setSmallmeatVisible] = useState([false, false, false])
 	const changeSmallmeatVisible = (index: number, visible: boolean) => {
@@ -49,7 +46,6 @@ export default () => {
 	}
 	const [smalladdshow, setSmallShow] = useState(true)
 	const [smallmeat, setsmallItem] = useState<string[][]>([])
-
 
 	const addSmall = (x: string[]) => {
 		setsmallItem([...smallmeat, x])
@@ -97,7 +93,7 @@ export default () => {
 	}
 
 	useEffect(() => {
-		const getVegetableJson = async () => {
+		const getNoHotFoodJson = async () => {
 			await get<CascaderOption[]>("/static/hot_big_meat.json").then((res) => {
 				console.log("res", res.data)
 				setBigmeatSelector(res.data)
@@ -111,7 +107,7 @@ export default () => {
 				setVegetableSelector(res.data)
 			})
 		}
-		getVegetableJson()
+		getNoHotFoodJson()
 	}, []);
 
 	const nav = useNavigate();

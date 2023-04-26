@@ -17,13 +17,13 @@ export default () => {
 	}
 	const [bigaddshow, setBigShow] = useState(true)
 	const [bigmeat, setbigItem] = useState<string[][]>([])
-	const [addBigmeatIndex, setAddBigmeatIndex] = useState(0)
+	// const [addBigmeatIndex, setAddBigmeatIndex] = useState(0)
 	const addBig = (x: string[]) => {
-		changeBigmeatVisible(addBigmeatIndex, true)
-		setAddBigmeatIndex(addBigmeatIndex + 1)
+		// changeBigmeatVisible(addBigmeatIndex, true)
+		// setAddBigmeatIndex(addBigmeatIndex + 1)
 		setbigItem([...bigmeat, x])
 		if (bigmeat.length === 2) {
-			setAddBigmeatIndex(0)
+			// setAddBigmeatIndex(0)
 			setBigShow(false)
 		}
 	}
@@ -46,6 +46,30 @@ export default () => {
 		tmp[index] = visible
 		setSmallmeatVisible(tmp)
 	}
+	const [smalladdshow, setSmallShow] = useState(true)
+	const [smallmeat, setsmallItem] = useState<string[][]>([])
+	// const [addSmallmeatIndex, setAddSmallmeatIndex] = useState(0)
+	const addSmall = (x: string[]) => {
+		// changeSmallmeatVisible(addSmallmeatIndex, true)
+		// setAddSmallmeatIndex(addSmallmeatIndex + 1)
+		setsmallItem([...smallmeat, x])
+		if (smallmeat.length === 2) {
+			// setAddSmallmeatIndex(0)
+			setSmallShow(false)
+		}
+	}
+	const change_small = (index: number, value: string[]) => {
+		let tmp = smallmeat.slice()
+		tmp[index] = value
+		setsmallItem(tmp)
+	}
+
+	const deleteSmallItem = (x: number) => {
+		let tmp = smallmeat.slice()
+		tmp.splice(x, 1)
+		setsmallItem(tmp)
+		setSmallShow(true)
+	}
 	const [vegetableselector, setVegetableSelector] = useState<CascaderOption[]>([])
 	const [vegetableVisible, setVegetableVisible] = useState([false, false, false])
 	const changeVegetableVisible = (index: number, visible: boolean) => {
@@ -53,8 +77,31 @@ export default () => {
 		tmp[index] = visible
 		setVegetableVisible(tmp)
 	}
+	const [vegetableaddshow, setVegetableShow] = useState(true)
+	const [vegetable, setvegetableItem] = useState<string[][]>([])
+	// const [addVegetableIndex, setAddVegetableIndex] = useState(0)
+	const addVegetable = (x: string[]) => {
+		// changeVegetableVisible(addVegetableIndex, true)
+		// setAddVegetableIndex(addVegetableIndex + 1)
+		setvegetableItem([...vegetable, x])
+		if (vegetable.length === 2) {
+			// setAddVegetableIndex(0)
+			setVegetableShow(false)
+		}
+	}
+	const deleteVegetableItem = (x: number) => {
+		let tmp = vegetable.slice()
+		tmp.splice(x, 1)
+		setvegetableItem(tmp)
+		setVegetableShow(true)
+	}
+	const change_vegetable = (index: number, value: string[]) => {
+		let tmp = vegetable.slice()
+		tmp[index] = value
+		setvegetableItem(tmp)
+	}
 	useEffect(() => {
-		const getVegetableJson = async () => {
+		const getHotFoodJson = async () => {
 			await get<CascaderOption[]>("/static/hot_big_meat.json").then((res) => {
 				console.log("res", res.data)
 				setBigmeatSelector(res.data)
@@ -68,49 +115,9 @@ export default () => {
 				setVegetableSelector(res.data)
 			})
 		}
-		getVegetableJson()
+		getHotFoodJson()
 	}, []);
 
-	const [smalladdshow, setSmallShow] = useState(true)
-	const [smallmeat, setsmallItem] = useState<string[][]>([])
-	const addSmall = (x: string[]) => {
-		setsmallItem([...smallmeat, x])
-		if (smallmeat.length === 2) {
-			setSmallShow(false)
-		}
-	}
-	const [vegetableaddshow, setVegetableShow] = useState(true)
-	const [vegetable, setvegetableItem] = useState<string[][]>([])
-	const addVegetable = (x: string[]) => {
-		setvegetableItem([...vegetable, x])
-		if (vegetable.length === 2) {
-			setVegetableShow(false)
-		}
-	}
-
-	const change_small = (index: number, value: string[]) => {
-		let tmp = smallmeat.slice()
-		tmp[index] = value
-		setsmallItem(tmp)
-	}
-	const change_vegetable = (index: number, value: string[]) => {
-		let tmp = vegetable.slice()
-		tmp[index] = value
-		setvegetableItem(tmp)
-	}
-
-	const deleteSmallItem = (x: number) => {
-		let tmp = smallmeat.slice()
-		tmp.splice(x, 1)
-		setsmallItem(tmp)
-		setSmallShow(true)
-	}
-	const deleteVegetableItem = (x: number) => {
-		let tmp = vegetable.slice()
-		tmp.splice(x, 1)
-		setvegetableItem(tmp)
-		setVegetableShow(true)
-	}
 	const nav = useNavigate();
 	const onFinish = (values: any) => {
 		console.log(bigmeat)
