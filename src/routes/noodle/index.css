@@ -1,28 +1,28 @@
-.noddle-page-section {
+.noodle-page-section {
     margin: 0.5rem;
 }
 
-.noddle-selectbox {
+.noodle-selectbox {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.noddle-formitem {
+.noodle-formitem {
     width: 95%;
 }
 
-.noddle-title {
+.noodle-title {
     font-size: 1.3rem;
     padding: 0.5rem;
     background-color: #fafbfc;
 }
 
-.noddle-adm-list-card {
+.noodle-adm-list-card {
     margin: 0;
 }
 
-.noddle-add {
+.noodle-add {
     text-align: center;
     padding: 1rem;
 }

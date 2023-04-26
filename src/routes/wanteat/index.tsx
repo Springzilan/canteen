@@ -10,7 +10,7 @@ export default () => {
             <Link to="/hotfood">
                 <Button className='wanteat-btn wanteat-btn2'>辣味套餐</Button>
             </Link>
-            <Link to="/noddle">
+            <Link to="/noodle">
                 <Button className='wanteat-btn wanteat-btn3'>特色面食</Button>
             </Link>
             <Link to="/rice">

@@ -8,33 +8,33 @@ import { get } from '../../util/api';
 export default () => {
 
 
-	const [noddleselector, setNoddleSelector] = useState<CascaderOption[]>([])
-	const [noddleVisible, setNoddleVisible] = useState([false, false, false])
-	const changeNoddleVisible = (index: number, visible: boolean) => {
-		let tmp = noddleVisible.slice()
+	const [noodleselector, setNoodleSelector] = useState<CascaderOption[]>([])
+	const [noodleVisible, setNoodleVisible] = useState([false, false, false])
+	const changeNoodleVisible = (index: number, visible: boolean) => {
+		let tmp = noodleVisible.slice()
 		tmp[index] = visible
-		setNoddleVisible(tmp)
+		setNoodleVisible(tmp)
 	}
-	const [noddleaddshow, setNoddleShow] = useState(true)
-	const [noddle, setnoddleItem] = useState<string[][]>([])
+	const [noodleaddshow, setNoodleShow] = useState(true)
+	const [noodle, setnoodleItem] = useState<string[][]>([])
 
-	const addNoddle = (x: string[]) => {
-		setnoddleItem([...noddle, x])
-		if (noddle.length === 2) {
-			setNoddleShow(false)
+	const addNoodle = (x: string[]) => {
+		setnoodleItem([...noodle, x])
+		if (noodle.length === 2) {
+			setNoodleShow(false)
 		}
 	}
-	const change_noddle = (index: number, value: string[]) => {
-		let tmp = noddle.slice()
+	const change_noodle = (index: number, value: string[]) => {
+		let tmp = noodle.slice()
 		tmp[index] = value
-		setnoddleItem(tmp)
+		setnoodleItem(tmp)
 	}
 
-	const deleteNoddleItem = (x: number) => {
-		let tmp = noddle.slice()
+	const deleteNoodleItem = (x: number) => {
+		let tmp = noodle.slice()
 		tmp.splice(x, 1)
-		setnoddleItem(tmp)
-		setNoddleShow(true)
+		setnoodleItem(tmp)
+		setNoodleShow(true)
 	}
 	const [flourselector, setFlourSelector] = useState<CascaderOption[]>([])
 	const [flourVisible, setFlourVisible] = useState([false, false, false])
@@ -68,7 +68,7 @@ export default () => {
 		const getVegetableJson = async () => {
 			await get<CascaderOption[]>("/static/noodles.json").then((res) => {
 				console.log("res", res.data)
-				setNoddleSelector(res.data)
+				setNoodleSelector(res.data)
 			})
 			await get<CascaderOption[]>("/static/flour.json").then((res) => {
 				console.log("res", res.data)
@@ -93,7 +93,7 @@ export default () => {
 	}
 	return (
 		<div>
-			<div className='noddle-page-section'>
+			<div className='noodle--page-section'>
 				<Form
 					name='form'
 					onFinish={onFinish}
@@ -102,26 +102,26 @@ export default () => {
 							提交
 						</Button>
 					}>
-					<div className='noddle-title'>面料类</div>
-					<div className='noddle-selector'>
-						{noddle.map((_, i) => {
+					<div className='noodle--title'>面料类</div>
+					<div className='noodle--selector'>
+						{noodle.map((_, i) => {
 							return (
-								<div className='noddle-selectbox'>
-									<div className='noddle-formitem'>
+								<div className='noodle--selectbox'>
+									<div className='noodle--formitem'>
 										<Form.Item
-											valuePropName={'noddle' + i}
+											valuePropName={'noodle' + i}
 											onClick={() => {
-												changeNoddleVisible(i, true)
+												changeNoodleVisible(i, true)
 											}}>
 											<Cascader
-												options={noddleselector}
-												visible={noddleVisible[i]}
+												options={noodleselector}
+												visible={noodleVisible[i]}
 												onClose={() => {
-													changeNoddleVisible(i, false)
+													changeNoodleVisible(i, false)
 												}}
-												value={noddle[i]}
+												value={noodle[i]}
 												onConfirm={(value) => {
-													change_noddle(i, value)
+													change_noodle(i, value)
 												}}
 												onSelect={(val, extend) => {
 													console.log('onSelect', val, extend.items)
@@ -137,22 +137,22 @@ export default () => {
 											</Cascader>
 										</Form.Item>
 									</div>
-									<div onClick={() => deleteNoddleItem(i)}><CloseCircleOutline /></div>
+									<div onClick={() => deleteNoodleItem(i)}><CloseCircleOutline /></div>
 								</div>
 							)
 						})}
-						{noddleaddshow ? (<div className='noddle-add' onClick={() => addNoddle([])}>
+						{noodleaddshow ? (<div className='noodle--add' onClick={() => addNoodle([])}>
 							<span>
 								<AddCircleOutline /> 添加
 							</span>
 						</div>) : ''}
 					</div>
-					<div className='noddle-title'>水煮类</div>
-					<div className='noddle-selector'>
+					<div className='noodle--title'>水煮类</div>
+					<div className='noodle--selector'>
 						{flour.map((_, i) => {
 							return (
-								<div className='noddle-selectbox'>
-									<div className='noddle-formitem'>
+								<div className='noodle--selectbox'>
+									<div className='noodle--formitem'>
 										<Form.Item
 											valuePropName={'flour' + i}
 											onClick={() => {
@@ -186,7 +186,7 @@ export default () => {
 								</div>
 							)
 						})}
-						{flouraddshow ? (<div className='noddle-add' onClick={() => addFlour([])}>
+						{flouraddshow ? (<div className='noodle--add' onClick={() => addFlour([])}>
 							<span>
 								<AddCircleOutline /> 添加
 							</span>

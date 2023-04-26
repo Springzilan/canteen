@@ -57,7 +57,7 @@ export default () => {
             value: 11
         }]
     ]
-    const noddlelist = [
+    const noodlelist = [
         {
             label: '红烧牛肉面',
             value: 12
@@ -197,7 +197,7 @@ export default () => {
                         value={[food[6] as number]}
                         columns={2}
                         disabled={choose[2]}
-                        options={noddlelist}
+                        options={noodlelist}
                         onChange={(arr, _) => change(6, arr)}
                     />
                 </div>

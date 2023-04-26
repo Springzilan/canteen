@@ -8,7 +8,7 @@ const Index = lazy(() => import('./routes/index'));
 const WantEat = lazy(() => import('./routes/wanteat'));
 const NoHotFood = lazy(() => import('./routes/nohotfood'));
 const HotFood = lazy(() => import('./routes/hotfood'));
-const Noddle = lazy(() => import('./routes/noddle'));
+const Noodle = lazy(() => import('./routes/noodle'));
 const Rice = lazy(() => import('./routes/rice'));
 const JapaneseFood = lazy(() => import('./routes/japanesefood'));
 const Nextweek = lazy(() => import('./routes/nextweek'));
@@ -39,8 +39,8 @@ const router = createBrowserRouter([
         element: <Suspense><HotFood /></Suspense>
       },
       {
-        path: "/noddle",
-        element: <Suspense><Noddle /></Suspense>
+        path: "/noodle",
+        element: <Suspense><Noodle /></Suspense>
       },
       {
         path: "/rice",
