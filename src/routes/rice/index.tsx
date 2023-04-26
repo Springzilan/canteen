@@ -77,68 +77,66 @@ export default () => {
 		nav('/')
 	}
 	return (
-		<div>
-			<div className='rice-page-section'>
-				<Form
-					name='form'
-					onFinish={onFinish}
-					footer={
-						<Button block type='submit' color='primary' size='large'>
-							提交
-						</Button>
-					}>
-					<div className='rice-title'>套餐</div>
-					<div className='rice-selector'>
-						{food.map((_, i) => {
-							return (
-								<div className='rice-selectbox'>
-									<div className='rice-formitem'>
-										<Form.Item
-											valuePropName={'food' + i}
-											name={'food' + i}
-											onClick={() => {
-												changeFoodVisible(i, true)
-											}}>
-											<Cascader
-												options={foodselector}
-												visible={foodVisible[i]}
-												onClose={() => {
+		<div className='rice-page-section'>
+			<Form
+				name='form'
+				onFinish={onFinish}
+				footer={
+					<Button block type='submit' color='primary' size='large'>
+						提交
+					</Button>
+				}>
+				<div className='rice-title'>套餐</div>
+				<div className='rice-selector'>
+					{food.map((_, i) => {
+						return (
+							<div className='rice-selectbox'>
+								<div className='rice-formitem'>
+									<Form.Item
+										valuePropName={'food' + i}
+										name={'food' + i}
+										onClick={() => {
+											changeFoodVisible(i, true)
+										}}>
+										<Cascader
+											options={foodselector}
+											visible={foodVisible[i]}
+											onClose={() => {
 
-													changeFoodVisible(i, false)
-												}}
-												value={food[i]}
-												onConfirm={(value) => {
-													change(i, value)
-												}}
-												onSelect={(val, extend) => {
-													console.log('onSelect', val, extend.items)
-												}}
+												changeFoodVisible(i, false)
+											}}
+											value={food[i]}
+											onConfirm={(value) => {
+												change(i, value)
+											}}
+											onSelect={(val, extend) => {
+												console.log('onSelect', val, extend.items)
+											}}
 
-											>
-												{items => {
-													console.log('items', items)
-													if (items.every(item => item === null)) {
-														return '未选择'
-													} else {
-														return items.map(item => item?.label ?? '未选择').join('-')
-													}
-												}}
-											</Cascader>
-										</Form.Item>
-									</div>
-									<div onClick={() => deleteItem(i)}><CloseCircleOutline /></div>
+										>
+											{items => {
+												console.log('items', items)
+												if (items.every(item => item === null)) {
+													return '未选择'
+												} else {
+													return items.map(item => item?.label ?? '未选择').join('-')
+												}
+											}}
+										</Cascader>
+									</Form.Item>
 								</div>
-							)
-						})}
-						{addshow ? (<div className='rice-add' onClick={() => add([])}>
-							<span>
-								<AddCircleOutline /> 添加
-							</span>
-						</div>) : ''}
-					</div>
+								<div onClick={() => deleteItem(i)}><CloseCircleOutline /></div>
+							</div>
+						)
+					})}
+					{addshow ? (<div className='rice-add' onClick={() => add([])}>
+						<span>
+							<AddCircleOutline /> 添加
+						</span>
+					</div>) : ''}
+				</div>
 
-				</Form>
-			</div >
+			</Form>
 		</div >
 	)
 }

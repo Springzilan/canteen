@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import './index.css'
 export default () => {
     return (
-        <div>
+        <>
             <div className='wanteat-row'>
                 <Link to="/nohotfood">
                     <Button className='wanteat-btn wanteat-btn1'>不辣套餐</Button>
@@ -20,13 +20,13 @@ export default () => {
                 <Link to="/japanesefood">
                     <Button className='wanteat-btn wanteat-btn5'>日式料理</Button>
                 </Link>
-            </div >
+            </div>
             <div>
                 <ul className="note">
                     <li>请选择下周你最想吃的菜品</li>
                     <li>每人每周仅能提交一次</li>
                 </ul>
             </div>
-        </div>
+        </>
     )
 }

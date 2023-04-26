@@ -2,7 +2,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import './index.css'
 import Cookies from 'js-cookie'
 import { Button, Input, Form, Toast } from 'antd-mobile'
-import { useEffect, useState } from 'react'
 
 export default () => {
     const nav = useNavigate()
@@ -11,19 +10,6 @@ export default () => {
         console.log('gdhggcghc', Cookies.get('user'))
         nav('/')
     }
-    const [wanteat, setWanteat] = useState<Boolean>(true)
-    const [borber, setBorber] = useState<Boolean>(true)
-    useEffect(() => {
-        if (Cookies.get('wanteat')) {
-            setWanteat(false)
-        }
-        console.log('gdhggcghc', Cookies.get('user'))
-        if (Cookies.get('user') === 'borber') {
-            setBorber(false)
-            console.log(Cookies.get('user'))
-            console.log(borber)
-        }
-    }, [])
     if (!Cookies.get('user')) {
         return (
             <>
@@ -72,16 +58,17 @@ export default () => {
                 <li>宫保鸡丁</li>
             </ul>
             <div className="index-container">
-                <div className="index-custom-btn btn-false" style={{ display: wanteat ? 'none' : 'block' }} onClick={() => yesCommit()} >
-                    我想要吃
-                </div>
-                <div className='wanteat' style={{ display: wanteat ? 'block' : 'none' }}>
-                    <Link to="/wanteat" >
-                        <div className="index-custom-btn index-btn-1" >
+                {
+                    Cookies.get('wanteat') ?
+                        <div className="index-custom-btn btn-false" onClick={() => yesCommit()} >
                             我想要吃
-                        </div>
-                    </Link>
-                </div>
+                        </div> :
+                        <Link to="/wanteat" >
+                            <div className="index-custom-btn index-btn-1" >
+                                我想要吃
+                            </div>
+                        </Link>
+                }
                 <Link to="/nextweek">
                     <div className="index-custom-btn index-btn-2">
                         下周吃啥
@@ -90,15 +77,16 @@ export default () => {
                 <div className="index-custom-btn index-btn-3">
                     餐后点评
                 </div>
-                <div className="index-custom-btn index-btn-4" style={{ display: borber ? 'block' : 'none' }}>
-                    我要反馈
-                </div>
-                <div style={{ display: borber ? 'none' : 'block' }}>
-                    <Link to="/feedback">
+                {
+                    Cookies.get('user') === 'borber' ? <Link to="/feedback">
                         <div className="index-custom-btn index-btn-4" >
                             我要反馈
                         </div>
-                    </Link></div>
+                    </Link> : <div className="index-custom-btn index-btn-4" >
+                        我要反馈
+                    </div>
+                }
+
             </div>
         </ >
     )
