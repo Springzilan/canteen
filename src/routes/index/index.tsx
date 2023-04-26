@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import './index.css'
 import Cookies from 'js-cookie'
-import { Button, Input, Form } from 'antd-mobile'
+import { Button, Input, Form, Toast } from 'antd-mobile'
 import { useEffect, useState } from 'react'
 
 export default () => {
@@ -42,6 +42,15 @@ export default () => {
                 </div>
             </>)
     }
+    const yesCommit = () => {
+        Toast.show({
+            content: '你已提交',
+            position: 'bottom',
+            afterClose: () => {
+                console.log('after')
+            },
+        })
+    }
     return (
         <>
             <div className='index-titlebox'>
@@ -53,7 +62,7 @@ export default () => {
                 <li>宫保鸡丁</li>
             </ul>
             <div className="index-container">
-                <div className="index-custom-btn btn-false" style={{ display: wanteat ? 'none' : 'block' }}>
+                <div className="index-custom-btn btn-false" style={{ display: wanteat ? 'none' : 'block' }} onClick={() => yesCommit()} >
                     我想要吃
                 </div>
                 <div className='wanteat' style={{ display: wanteat ? 'block' : 'none' }}>
