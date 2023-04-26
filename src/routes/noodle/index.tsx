@@ -210,6 +210,7 @@ export default () => {
 					</div>
 
 				</Form>
+				<div className='note'>注意：每周每人仅能提交一次，且无法更改</div>
 			</div >
 		</div >
 	)
