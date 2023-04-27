@@ -65,7 +65,7 @@ export default () => {
 		await post<WantEatDTO>("/api/want", wanteat).then((res) => {
 			console.log("res", res.data)
 			if (res.data) {
-				Cookies.set('wanteat', 'yes')
+				Cookies.set('wanteat', 'true')
 				Toast.show({
 					content: '提交完成',
 					position: 'bottom'

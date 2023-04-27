@@ -3,22 +3,25 @@ import './index.css'
 import Cookies from 'js-cookie'
 import { Button, Input, Form, Toast } from 'antd-mobile'
 import { post } from '../../util/api';
-import { WantCheckDTO } from '../../lib/model';
-import { useEffect } from 'react';
+import { WantCheckVO, WantCheckDTO } from '../../lib/model';
+import { useEffect, useState } from 'react';
 
 export default () => {
-    var wantcheck: WantCheckDTO = {
-        "user": Cookies.get('user')
-    }
     useEffect(() => {
         const getWantCheck = async () => {
-            await post<WantCheckDTO>("/api/want_check", wantcheck).then((res) => {
-                console.log("checkres", res.data)
-                Cookies.set('wanteat', res.data)
+            console.log('tttt', Cookies.get('wanteat'))
+            var wantcheck: WantCheckDTO = {
+                "user": Cookies.get('user')
+            }
+            await post<WantCheckVO>("/api/want_check", wantcheck).then((res) => {
+                console.log("checkres", res.data.data)
+                Cookies.set('wanteat', res.data.data.toString())
+                showCookieUpdata(res.data.data.toString())
             })
         }
         getWantCheck()
     }, []);
+    const [showCookie, showCookieUpdata] = useState(Cookies.get('wanteat'))
     const nav = useNavigate()
     const submit = (value: string) => {
         Cookies.set('user', value)
@@ -74,7 +77,7 @@ export default () => {
             </ul>
             <div className="index-container">
                 {
-                    Cookies.get('wanteat') ?
+                    showCookie === 'true' ?
                         <div className="index-custom-btn btn-false" onClick={() => yesCommit()} >
                             我想要吃
                         </div> :

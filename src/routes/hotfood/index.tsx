@@ -137,7 +137,7 @@ export default () => {
 			// updateHistory(resp.data.data);
 			console.log('Success:', resp);
 			if (resp.data) {
-				Cookies.set('wanteat', 'yes')
+				Cookies.set('wanteat', 'true')
 
 				Toast.show({
 					content: '提交完成',
