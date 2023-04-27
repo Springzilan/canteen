@@ -2,8 +2,23 @@ import { Link, useNavigate } from 'react-router-dom'
 import './index.css'
 import Cookies from 'js-cookie'
 import { Button, Input, Form, Toast } from 'antd-mobile'
+import { post } from '../../util/api';
+import { WantCheckDTO } from '../../lib/model';
+import { useEffect } from 'react';
 
 export default () => {
+    var wantcheck: WantCheckDTO = {
+        "user": Cookies.get('user')
+    }
+    useEffect(() => {
+        const getWantCheck = async () => {
+            await post<WantCheckDTO>("/api/want_check", wantcheck).then((res) => {
+                console.log("checkres", res.data)
+                Cookies.set('wanteat', res.data)
+            })
+        }
+        getWantCheck()
+    }, []);
     const nav = useNavigate()
     const submit = (value: string) => {
         Cookies.set('user', value)
