@@ -9,19 +9,32 @@ import { useEffect, useState } from 'react';
 export default () => {
     useEffect(() => {
         const getWantCheck = async () => {
-            console.log('tttt', Cookies.get('wanteat'))
-            var wantcheck: WantCheckDTO = {
-                "user": Cookies.get('user')
+            if (Cookies.get('wanteat') === "true") {
+                console.log('tttt', Cookies.get('wanteat'))
+                var wantcheck: WantCheckDTO = {
+                    "user": Cookies.get('user')
+                }
+                await post<WantCheckVO>("/api/want_check", wantcheck).then((res) => {
+                    console.log("checkres", res.data.data)
+                    Cookies.set('wanteat', res.data.data.toString())
+                    showCookieUpdata(res.data.data.toString())
+                })
             }
-            await post<WantCheckVO>("/api/want_check", wantcheck).then((res) => {
-                console.log("checkres", res.data.data)
-                Cookies.set('wanteat', res.data.data.toString())
-                showCookieUpdata(res.data.data.toString())
-            })
+
         }
         getWantCheck()
     }, []);
+    if (Cookies.get('wanteat') === undefined) {
+        Cookies.set('wanteat', 'false')
+    }
+    if (Cookies.get('nextweek') === undefined) {
+        console.log('12323');
+
+        Cookies.set('nextweek', 'false')
+    }
+
     const [showCookie, showCookieUpdata] = useState(Cookies.get('wanteat'))
+    const [nextweekCookie, _] = useState(Cookies.get('nextweek'))
     const nav = useNavigate()
     const submit = (value: string) => {
         Cookies.set('user', value)
@@ -58,10 +71,17 @@ export default () => {
         if (Cookies.get('wanteat')) {
             Toast.show({
                 content: '您已提交',
-                position: 'bottom',
-                afterClose: () => {
-                    console.log('after')
-                },
+                position: 'bottom'
+            })
+        }
+    }
+    console.log('nextweek', Cookies.get('nextweek'));
+
+    const yesNextWeek = () => {
+        if (Cookies.get('nextweek')) {
+            Toast.show({
+                content: '您已提交',
+                position: 'bottom'
             })
         }
     }
@@ -87,11 +107,16 @@ export default () => {
                             </div>
                         </Link>
                 }
-                <Link to="/nextweek">
-                    <div className="index-custom-btn index-btn-2">
-                        下周吃啥
-                    </div>
-                </Link>
+                {
+                    nextweekCookie === 'true' ?
+                        <div className="index-custom-btn btn-false" onClick={() => yesNextWeek()} >
+                            下周吃啥
+                        </div> :
+                        <Link to="/nextweek">
+                            <div className="index-custom-btn index-btn-2">
+                                下周吃啥
+                            </div>
+                        </Link>}
                 <div className="index-custom-btn index-btn-3">
                     餐后点评
                 </div>

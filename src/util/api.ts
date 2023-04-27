@@ -2,6 +2,7 @@ import axios from "axios";
 
 const inst = axios.create({
     baseURL: " https://canteen.borber.top",
+    // baseURL: "http://192.168.2.2:3004"
 })
 
 export const  post = async <T>(url: string, data: any) => {
