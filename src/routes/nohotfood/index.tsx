@@ -95,11 +95,11 @@ export default () => {
 
 	useEffect(() => {
 		const getNoHotFoodJson = async () => {
-			await get<CascaderOption[]>("/static/hot_big_meat.json").then((res) => {
+			await get<CascaderOption[]>("/static/nohot_big_meat.json").then((res) => {
 				console.log("res", res.data)
 				setBigmeatSelector(res.data)
 			})
-			await get<CascaderOption[]>("/static/hot_little_meat.json").then((res) => {
+			await get<CascaderOption[]>("/static/nohot_little_meat.json").then((res) => {
 				console.log("res", res.data)
 				setSmallmeatSelector(res.data)
 			})
@@ -116,14 +116,14 @@ export default () => {
 		console.log(bigmeat)
 		console.log(smallmeat)
 		console.log(vegetable)
-		var hotfoodtmp = bigmeat.concat(smallmeat, vegetable)
-		var hotfood: string[] = []
-		hotfoodtmp.map((item) => {
-			hotfood.push(item[item.length - 1])
+		var nohotfoodtmp = bigmeat.concat(smallmeat, vegetable)
+		var nohotfood: string[] = []
+		nohotfoodtmp.map((item) => {
+			nohotfood.push(item[item.length - 1])
 		})
 		var wanteat: WantEatDTO = {
 			"user": Cookies.get('user'),
-			"content": hotfood
+			"content": nohotfood
 		}
 		await post<WantEatDTO>("/api/want", wanteat).then(resp => {
 			// updateHistory(resp.data.data);
