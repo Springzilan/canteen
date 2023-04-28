@@ -25,7 +25,13 @@ export default () => {
                 console.log(Cookies.get('wanteat'))
                 nav('/')
             }
-            }>不提交</Button>
+            }>我想要吃不提交</Button>
+            <Button onClick={() => {
+                Cookies.remove('nextweek')
+                console.log(Cookies.get('wanteat'))
+                nav('/')
+            }
+            }>下周吃啥不提交</Button>
         </div>
     )
 }
