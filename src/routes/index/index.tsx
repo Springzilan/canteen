@@ -38,7 +38,7 @@ export default () => {
     const nav = useNavigate()
     const submit = (value: string) => {
         Cookies.set('user', value)
-        console.log('gdhggcghc', Cookies.get('user'))
+        console.log(Cookies.get('user'))
         nav('/')
     }
     if (!Cookies.get('user')) {
